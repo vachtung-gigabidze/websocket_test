@@ -12,6 +12,26 @@ class WebSocketScreenView extends StatelessWidget {
       builder: (context, viewModel, child) => Scaffold(
         appBar: AppBar(
           title: Text(viewModel.title),
+          elevation: 0,
+          leading: InkWell(
+            child: Container(
+              margin: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Theme.of(context).backgroundColor,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      offset: Offset(5, 5),
+                      blurRadius: 10),
+                ],
+              ),
+              child: Icon(
+                Icons.wb_sunny,
+                color: Theme.of(context).toggleableActiveColor,
+              ),
+            ),
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
