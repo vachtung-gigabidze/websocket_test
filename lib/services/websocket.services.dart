@@ -6,17 +6,18 @@ class WebSocketService with ListenableServiceMixin {
   late final url1;
   late final rxUser1;
   final String urlPrefix = 'ws://localhost:8888';
+  final userName;
 
   //  = WebSocketChannel.connect(
   //   // Uri.parse('wss://echo.websocket.events'),
   //   Uri.parse('ws://localhost:8888/rooms'),
   // );
 
-  WebSocketService() {
+  WebSocketService({required this.userName}) {
     // final url = Uri.parse('$urlPrefix/rooms');
-    url1 = Uri.parse('$urlPrefix/game?user=user1');
+    url1 = Uri.parse('$urlPrefix/game?user=$userName');
     channelUser1 = WebSocketChannel.connect(url1);
-    rxUser1 = channelUser1.stream.asBroadcastStream();
+    //rxUser1 = channelUser1.stream.asBroadcastStream();
     // const port = 8888;
     // const urlPrefix = 'ws://localhost:$port';
     // final url2 = Uri.parse('$urlPrefix/chat?user=user2');

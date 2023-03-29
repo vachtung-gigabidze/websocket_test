@@ -11,6 +11,73 @@ void main() {
 
     expect(mergeTwoLists(list1, list2)?.val, 1);
   });
+  test('Meeting Rooms', () {
+    List<Interval> intervals = [
+      Interval(0, 30),
+      Interval(5, 10),
+      Interval(15, 20)
+    ];
+    List<Interval> intervals2 = [Interval(5, 10), Interval(15, 20)];
+
+    expect(canAttendMeetings(intervals), false);
+    expect(canAttendMeetings(intervals2), true);
+  });
+  test('peakIndexInMountainArray', () {
+    expect(peakIndexInMountainArray([0, 1, 0]), 1);
+    expect(peakIndexInMountainArray([0, 10, 5, 0]), 1);
+  });
+}
+
+int peakIndexInMountainArray(List<int> arr) {
+  int left = 0;
+  int right = arr.length - 1;
+  int middle;
+  while (left <= right) {
+    middle = left + (right - left) ~/ 2;
+    if (arr[middle] > arr[middle + 1]) {
+      right = middle - 1;
+    } else {
+      left = middle + 1;
+    }
+  }
+  return left;
+}
+
+String nextGreatestLetter(List<String> letters, String target) {
+  int left = 0;
+  int right = letters.length - 1;
+  int middle;
+  while (left <= right) {
+    middle = left + (right - left) ~/ 2;
+    if (letters[middle].compareTo(target) > 0) {
+      right = middle - 1;
+    } else {
+      left = middle + 1;
+    }
+  }
+  return letters[left % letters.length];
+}
+
+class Interval {
+  int start, end;
+  Interval(this.start, this.end) {
+    this.start = start;
+    this.end = end;
+  }
+}
+
+bool canAttendMeetings(List<Interval> intervals) {
+  for (int i = 0; i < intervals.length; i++) {
+    for (int j = i + 1; j < intervals.length; j++) {
+      if ((intervals[i].start <= intervals[j].start &&
+              intervals[i].end >= intervals[j].start) ||
+          (intervals[i].start <= intervals[j].end &&
+              intervals[i].end >= intervals[j].end)) {
+        return false;
+      }
+    }
+  }
+  return true;
 }
 
 class ListNode {

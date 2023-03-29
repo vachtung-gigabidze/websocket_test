@@ -28,5 +28,5 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => TodosService());
-  locator.registerLazySingleton(() => WebSocketService());
+  locator.registerLazySingleton(() => WebSocketService(userName: 'Dima'));
 }
