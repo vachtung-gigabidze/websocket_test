@@ -14,7 +14,7 @@ class WebSocketService with ListenableServiceMixin {
 
   WebSocketService() {
     // final url = Uri.parse('$urlPrefix/rooms');
-    url1 = Uri.parse('$urlPrefix/chat?user=user1');
+    url1 = Uri.parse('$urlPrefix/game?user=user1');
     channelUser1 = WebSocketChannel.connect(url1);
     rxUser1 = channelUser1.stream.asBroadcastStream();
     // const port = 8888;
@@ -41,7 +41,7 @@ class WebSocketService with ListenableServiceMixin {
     if (channelUser1 != null && channelUser1.closeCode != null) {
       channelUser1 = WebSocketChannel.connect(url1);
     }
-    final send1 = '{"to": "broadcast", "msg": "$message"}';
+    final send1 = '{"to": "game", "msg": "$message"}';
     channelUser1.sink.add(send1);
   }
 

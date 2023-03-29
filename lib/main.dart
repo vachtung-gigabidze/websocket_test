@@ -1,6 +1,7 @@
+import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animated_theme/animated_theme_app.dart';
-import 'package:flutter_animated_theme/animation_type.dart';
+// import 'package:flutter_animated_theme/animated_theme_app.dart';
+// import 'package:flutter_animated_theme/animation_type.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_websocket_app/app/app.bottomsheets.dart';
 import 'package:my_websocket_app/app/app.dialogs.dart';
@@ -35,22 +36,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return MaterialApp(
-    //   //home: const TodosScreenView(),
-    //   home: const WebSocketScreenView(),
+    return ThemeProvider(
+        initTheme: ThemeData.light(),
+        builder: (p0, theme) {
+          return MaterialApp(
+            //home: const TodosScreenView(),
+            home: const WebSocketScreenView(),
+            theme: theme,
+            title: 'Flutter Stacked Todos',
+          );
+        });
+    // return AnimatedThemeApp(
+    //   debugShowCheckedModeBanner: false,
+    //   themeMode: ThemeMode.light,
+    //   animationDuration: Duration(milliseconds: 500),
+    //   animationType: AnimationType.CIRCULAR_ANIMATED_THEME,
     //   theme: ThemeData.light(),
+    //   darkTheme: ThemeData.dark(),
+    //   home: const WebSocketScreenView(),
     //   title: 'Flutter Stacked Todos',
     // );
-    return AnimatedThemeApp(
-      debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.light,
-      animationDuration: Duration(milliseconds: 500),
-      animationType: AnimationType.CIRCULAR_ANIMATED_THEME,
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
-      home: const WebSocketScreenView(),
-      title: 'Flutter Stacked Todos',
-    );
   }
   // @override
   // Widget build(BuildContext context) {
