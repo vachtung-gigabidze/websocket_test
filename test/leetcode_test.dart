@@ -1,3 +1,6 @@
+import 'dart:collection';
+import 'dart:math';
+
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -26,6 +29,70 @@ void main() {
     expect(peakIndexInMountainArray([0, 1, 0]), 1);
     expect(peakIndexInMountainArray([0, 10, 5, 0]), 1);
   });
+  test('averageOfLevels', () {
+    //3,9,20,null,null,15,7
+    TreeNode? node = TreeNode(3, TreeNode(9, null, null),
+        TreeNode(20, TreeNode(15, null, null), TreeNode(7, null, null)));
+    TreeNode? node2 = TreeNode(
+        3,
+        TreeNode(9, TreeNode(15, null, null), TreeNode(7, null, null)),
+        TreeNode(20, null, null));
+    TreeNode? node3 = TreeNode(1, TreeNode(1), null);
+
+    expect(averageOfLevels(node), [3.00000, 14.50000, 11.00000]);
+    expect(averageOfLevels(node2), [3.00000, 14.50000, 11.00000]);
+    expect(averageOfLevels(node3), [1.00000, 1.0000]);
+  });
+}
+
+int minDepth(TreeNode? root) {
+  if (root == null) {
+    return 0;
+  }
+  return minDepthLevel(root, 0);
+}
+
+int minDepthLevel(TreeNode? root, int level) {
+  if (root == null) {
+    return 100000;
+  }
+  if (root.left == null && root.right == null) {
+    return level;
+  }
+
+  return min(minDepthLevel(root.left, level + 1),
+      minDepthLevel(root.right, level + 1));
+}
+
+class TreeNode {
+  int val;
+  TreeNode? left;
+  TreeNode? right;
+  TreeNode([this.val = 0, this.left, this.right]);
+}
+
+List<double> averageOfLevels(TreeNode? root) {
+  Queue queue = Queue<TreeNode>();
+  queue.add(root);
+  List<double> result = [];
+
+  while (queue.length != 0) {
+    var qlen = queue.length, row = .0;
+
+    for (int i = 0; i < qlen; i++) {
+      TreeNode node = queue.removeFirst();
+      row += node.val;
+      if (node.left != null) {
+        queue.add(node.left);
+      }
+      if (node.right != null) {
+        queue.add(node.right);
+      }
+    }
+    result.add(row / qlen);
+  }
+
+  return result;
 }
 
 int peakIndexInMountainArray(List<int> arr) {
